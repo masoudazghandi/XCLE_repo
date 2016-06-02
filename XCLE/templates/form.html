@@ -1,0 +1,338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>XCLE Query Form</title>
+<link rel="stylesheet" type="text/css" href="/static/view.css" media="all">
+<script type="text/javascript" src="static/view.js"></script>
+<script type="text/javascript" src="static/calendar.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+</script>
+<script>
+	// Initialize date and top publisher features 
+	$(function() { 
+		pub_request = JSON.stringify({"pubs": " "})
+		$.ajax({ 
+			type: "POST", 
+			contentType: "application/json; charset=utf-8", 
+			url: "/info", 
+			dataType: "json", 
+			async: true, 
+			data: pub_request,
+			success: function(data) {
+				var vals = data.pubs;
+				var $pub_select = $("#top_pubs");
+				$pub_select.empty(); 
+				$pub_select.append("<option>" + 'Not Listed' + "</option>");
+				$.each(vals, function(index, value) {
+					$pub_select.append("<option>" + value + "</option>");
+				});
+				
+			}, 
+			error: function (result) { 
+			} 
+		}); 
+	});
+
+
+</script>
+</head>
+<body id="main_body" >
+	
+	<img id="top" src="/static/top.png" alt="">
+	<div id="form_container">
+	
+		<h1><a>XCLE Query Form</a></h1>
+ 
+		<form id="xcle_query_form" class="appnitro"  method="post" action="" enctype=multipart/form-data>
+	            	<div class="form_description">
+			<h2>XCLE Query Form</h2>
+	            		<p>Please enter submission characteristics to generate report</p>
+
+		</div>	
+
+
+            		<ul >
+
+               		 <li id="li_1" >      
+    
+
+				<div >
+					<label class="description" for="user_id">User Name</label>
+				    <input id="user_id" name="user_id" class="feature" type="text" size="14" maxlength="12" value="Default User"/> 
+				</div> 
+
+               		 </li>	
+<!-- 	<li></li>
+	<li></li> -->
+                <li id="li_2" >
+                
+                    <!-- <div> -->
+                    	<label class="description" for="sub_type">Release Type </label>
+                        	<select class="feature" id="sub_type" name="sub_type"> 
+                            		<option value="Base" selected="selected">Base</option>
+                            		<option value="Update" >Update</option>
+
+                        	</select>
+                    <!-- </div>  -->
+                </li>		
+
+                <li id="li_3" >
+                <label class="description" for="top_pubs">Publisher Selection </label>
+                    <div>
+                    <!-- Dynamically Loads -->
+                        <select class="feature" id="top_pubs" name="top_pubs"> 
+                            <option value="None" selected="selected">Other</option>
+                        </select>
+                    </div> 
+                </li>		
+                <li id="li_4" >
+                    <label class="description" for="element_1">Pass Number </label>
+
+                    <div>
+                        <input id="Pass_Num" name="Pass_Num" class="feature" type="text" size="2" maxlength="2" value="1"/> 
+                    </div> 
+
+                </li>		
+
+                <li id="li_5" >
+                    <label class="description" for="xcid_1">XCID</label>
+
+                    <div>
+                        <input id="xcid_1" name="xcid_1" class="feature" type="text" size="39" maxlength="37" value="XXXXXXXXXXXX-20160301-XXXXXXXX"/> 
+<!--                         <input id="xcid_2" name="xcid_2" class="feature" type="text" size="10" maxlength="8" value=""/> 
+                        <input id="xcid_3" name="xcid_3" class="feature" type="text" size="10" maxlength="8" value=""/>  -->
+                    </div> 
+
+                </li>
+
+                <li id="li_6" >
+                    <label class="description" for="element_5"> </label>
+                    <span>
+<!--                         <input id="element_5_1" name="Optional" class="feature" type="checkbox" value="1" />
+                        <label class="choice" for="element_5_1">Optional Submission?</label> -->
+                        <input id="element_5_2" name="Mltplyr" class="feature" type="checkbox" value="1" checked/>
+                        <label class="choice" for="element_5_2">Multiplayer Game?</label>
+                        <input id="element_5_3" name="Blckbster" class="feature" type="checkbox" value="1" />
+                        <label class="choice" for="element_5_3">Blockbuster Game?</label>
+                        <input id="element_5_4" name="Ind" class="feature" type="checkbox" value="0" />
+                        <label class="choice" for="element_5_4">Independent Game?</label>
+                    </span> 
+                </li>		
+                
+               <!--  <li id="li_7" >
+
+                    <label class="description" for="element_2">Kickoff Date</label>
+                    
+                    <span>
+                        <input id="kickoff_month" name="kickoff_month" class="feature" 
+                        	size="2" maxlength="2" value="1" type="text"> /
+                        <label for="element_2_1">MM</label>
+                    </span>
+
+                    <span>
+                        <input id="kickoff_day" name="kickoff_day" class="date" 
+                        size="2" maxlength="2" value="1" type="text"> /
+                        <label for="element_2_2">DD</label>
+                    </span>
+
+                    <span>
+                        <input id="kickoff_year" name="kickoff_year" class="date" 
+                        	size="4" maxlength="4" value="2015" type="text">
+                        <label for="element_2_3">YYYY</label>
+                    </span>
+
+                    <span id="calendar_2">
+                        <img id="cal_img_2" class="datepicker" src="/static/calendar.gif" alt="Pick a date.">	
+                    </span>
+
+                </li>
+ -->
+<!--                 <li id="li_8" >
+                <label class="description" for="element_6">Report Type </label>
+                    <div>
+                        <select class="feature" id="report_type" name="report_type">
+                        	<option value="Minimal">Minimal</option> 
+                            	<option value="Full" selected="selected">Full</option>
+                        </select>
+                    </div> 
+                </li>	
+ -->
+
+                <li class="buttons1">
+                    	<input type="hidden" name="form_id" value="1082962" />
+                    	<input id="append_entry" class="button_text" type="button" name="append_entry"
+                            	value="Append Form Data" onclick="append_feats()"> 
+                	<input id="generate_P" class="button_text" type="button" name="submit"
+                            	value="Generate Report" onclick="append_feats(); get_and_predict_tests(feats);">
+                 	<label for="generate_P" >  </label>
+                	<input id="resetForm" class="button_text" type="button" name="res_form"
+                            value="Reset UI Data" onclick="form_clear(); clear_feats()">                  	
+                 		
+	 			</li>
+	 			<li></li>
+				<li class="buttons2">
+
+		<input id="docs" class="button_text" type="button" name="dl_excel"
+                            	value="View Instructions" onclick = "location.href='/download_doc';" >
+<!--                     <input id="saveForm1" class="res_dep" type="button" name="dl_excel"
+                            value="Download Excel" onclick = "location.href='/download_excel';" 
+                            disabled>
+
+                    <input id="saveForm2" class="res_dep" type="button" name="show_html"
+                            value="Display HTML" onclick="result_html()" disabled>  -->
+
+                    	<input id="saveForm4" class="res_dep" type="button" name="sub_test"
+                            	value="Create Test Pass Report" onclick="send_to_db()" disabled> 
+
+
+            	</li>
+<!--             	<li></li>
+				<li class="upload">
+
+		            	<label class="description" for="file_up">Batch Upload:</label>
+						<input type=file id="file_up" name=file>
+			         	<input type=submit value=Upload>            		
+
+		                    <input id="uploadBatch" class="button_text" type="file" name="ul_excel"
+		                        value="Upload Batch (.xlsx)" onclick = > 
+		        </li>        -->           
+
+
+
+            </ul>
+            
+		
+	<li></li>
+	<div class="feedback">
+		<p>XCLE Log: <br><br><br></p>
+	</div>         	
+	<li></li>
+	</form>
+		<div id="footer">
+           	<a href="mailto:v-micpal@microsoft.com?Subject=XCLE Data Entry Support" target="_top">Contact Support</a>
+		</div>
+        
+	</div>
+    
+	<img id="bottom" src="/static/bottom.png" alt="">
+
+
+		
+		<script type="text/javascript">
+
+			// // CALENDAR SETUP
+
+			// Calendar.setup({
+			// 	inputField	: "element_2_3",
+			// 	baseField    	: "element_2",
+			// 	displayArea  	: "calendar_2",
+			// 	button		: "cal_img_2",
+			// 	ifFormat	: "%B %e, %Y",
+			// 	onSelect	: selectDate
+			// });
+
+			var feats = {}
+
+			function clear_feats(){
+				feats = {}				
+			}
+
+			function update_feedback(message) {
+				$(".feedback").empty()
+				$(".feedback").append("<p> XCLE Log: ")
+			   	$(".feedback").append(" <strong>" + message + "</p>")
+			}
+
+			// Classifier Query Setup
+			function append_feats(){
+				var inputs = document.getElementsByClassName("feature");
+				
+				Array.prototype.forEach.call(inputs, function(input){
+					if ( !feats[input.name] ) {
+						feats[input.name] = [ ];
+					} 
+					if (input.type == "checkbox"){
+						feats[input.name].push(input.checked);
+					} else{
+						feats[input.name].push(input.value);
+					}
+				
+				});
+
+				update_feedback('Record Appended:<br>' + $("[name=xcid_1]").val());
+			}
+
+
+			function get_and_predict_tests(features){ 
+				update_feedback('Generating Predictions...<br><br>');
+				features_p = JSON.stringify(features)
+				clear_feats()
+				$.ajax({ 
+					type: "POST", 
+					contentType: "application/json; charset=utf-8", 
+					url: "/score", 
+					dataType: "json", 
+					async: true, 
+					data: features_p,
+					success: function (data) { 
+					    
+					   if (data['result'] == 'success') {
+					   		update_feedback('Success!');
+					   		$("input[class=res_dep]").prop('disabled', false);
+					   		
+					   }else{
+					   	failure();
+					   }
+
+					}, 
+					error: function (result) { 
+						failure();
+					} 
+		       	 	});
+			}
+
+			function result_html(){
+				var dt = new Date().toString();
+				window.open("static/Results.html?TimeStamp="+dt);
+			}	
+
+
+			function send_to_db(){
+				db_send = JSON.stringify({"db_send": " "})
+				$.ajax({ 
+					type: "POST", 
+					contentType: "application/json; charset=utf-8", 
+					url: "/send_to_db", 
+					dataType: "json", 
+					async: true, 
+					data: db_send,
+					success: function(data) {
+						   	if (data['result'] == 'success') {
+						   		update_feedback('Predictions saved to DB.');						
+	   						}else{
+						   		failure();
+						   	}
+					}, 
+					error: function (result) { 
+						failure();
+					} 
+				}); 				
+			}
+
+			function form_clear(){		
+				document.getElementById("xcle_query_form").reset();
+		   		$("input[class=res_dep]").prop('disabled', true);
+		   		update_feedback('<br><br><br>')
+		   		clear_feats();
+
+			}
+			function failure(){
+				update_feedback('Failure - Contact Support<br><br>');
+			}
+					
+		</script>
+
+
+	</body>
+</html>
